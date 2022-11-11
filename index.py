@@ -29,3 +29,4 @@ with st.sidebar:
     ''')
 
     st.button("按鈕1")
+    print("程式起點")
