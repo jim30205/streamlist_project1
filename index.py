@@ -17,11 +17,15 @@ st.markdown('''
 ---
 ##### H5
 ''')
-st.sidebar.markdown('''
-### 這是sidebar
----
-這是**段落1**
+with st.sidebar:
 
-這是*段落2*
+    st.sidebar.markdown('''
+    ### 這是sidebar
+    ---
+    這是**段落1**
 
-''')
+    這是*段落2*
+
+    ''')
+
+    st.button("按鈕1")
