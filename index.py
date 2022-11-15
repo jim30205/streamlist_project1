@@ -6,15 +6,15 @@ from firebase_admin import firestore
 import json
 import pandas as pd
 # Use a service account.
-app =None
-db =None
-if db is None:
-    key_dict=json.loads(st.secrets["textkey"])
-    cred = credentials.Certificate('private/raspberry1-d07d8-firebase-adminsdk-4tlwq-68582b8dbd.json')
-    if app is None:
-        app = firebase_admin.initialize_app(cred)
-
+if 'firestore' not in st.session_state:
+    st.session_state['firestore'] = True   
+    key_dict = json.loads(st.secrets["textkey"])
+    cred = credentials.Certificate(key_dict)   
+    app = firebase_admin.initialize_app(cred)
     db = firestore.client()
+    st.session_state['db'] = db
+
+db = st.session_state['db']
 records_ref = db.collection('records')
 query = records_ref.limit_to_last(20)
 docs = query.get()
