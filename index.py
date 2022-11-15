@@ -5,12 +5,13 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 import json
 # Use a service account.
+app =None
 db =None
 if db is None:
     key_dict=json.loads(st.secrets["textkey"])
     cred = credentials.Certificate('private/raspberry1-d07d8-firebase-adminsdk-4tlwq-68582b8dbd.json')
-
-    app = firebase_admin.initialize_app(cred)
+    if app is None:
+        app = firebase_admin.initialize_app(cred)
 
     db = firestore.client()
 st.title("光線和距離即時監控")
